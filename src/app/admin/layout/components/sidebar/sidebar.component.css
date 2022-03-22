@@ -1,0 +1,16 @@
+mat-list> a{
+    text-decoration: none;
+    color: #ff4f81;
+    margin-bottom: 3px;
+    border:0;
+    display: flex;
+}
+mat-list> a:hover{
+    color: aliceblue;
+    background-color: #ff4f81;
+}
+.sidebar-list{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+}

@@ -6,7 +6,8 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 
 
-
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -15,7 +16,9 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatListModule,
+    MatButtonModule
   ],
   exports:[
     HeaderComponent,
