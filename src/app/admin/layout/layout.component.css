@@ -1,6 +1,5 @@
 .admin-container {
-    width: 98vw;
-    height: 88vh;
+    min-height: 86vh;
     margin: 10px;
     border-radius: 5px;
 }
@@ -14,5 +13,5 @@
 .admin-content{
     margin-top:2px;
     padding-left: 20px;
-    background-color: red;
+
 }
