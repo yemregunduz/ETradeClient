@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertifyPosition } from 'src/app/enums/alertifyPosition';
-import { MessageType } from 'src/app/enums/messageType';
+import { AlertifyOption } from 'src/app/options/admin/alertifyOption';
 declare var alertify:any
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class AlertifyService {
 
   constructor() { }
 
-  message(message:string ,alertifyOptions:Partial<AlertifyOptions>){
+  message(message:string ,alertifyOptions:Partial<AlertifyOption>){
     alertify.set('notifier','position',alertifyOptions.alertifyPosition)
     alertify.set('notifier','delay',alertifyOptions.delay)
     const msg = alertify[alertifyOptions.messageType](message);
@@ -21,12 +20,6 @@ export class AlertifyService {
     alertify.dismissAll();
   }
 
-}
-export class AlertifyOptions{
-  messageType:MessageType = MessageType.Message;
-  alertifyPosition:AlertifyPosition = AlertifyPosition.TopRight;
-  delay:number = 2.5
-  dismissOthers:boolean = false
 }
 
 
