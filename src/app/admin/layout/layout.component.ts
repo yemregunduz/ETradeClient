@@ -12,7 +12,9 @@ export class LayoutComponent implements OnInit {
   constructor(private observer:BreakpointObserver) { }
   @ViewChild(MatSidenav)
   sidenav!:MatSidenav
+  
   ngOnInit(): void {
+    
   }
   ngAfterViewInit(){
     this.observer
@@ -26,6 +28,7 @@ export class LayoutComponent implements OnInit {
         this.sidenav.mode = 'side';
         this.sidenav.open();
       }
+      console.log("at kafasi")
     });
   }
 
