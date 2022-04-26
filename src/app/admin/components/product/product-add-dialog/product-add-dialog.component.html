@@ -1,24 +1,47 @@
-<h2 mat></h2>
+<h2 mat-dialog-title class="title">Ürün ekle</h2>
 <mat-dialog-content  >
     <form [formGroup]="productAddForm">
-        <mat-form-field  appearance="outline">
-            <mat-label>Ürün Adı</mat-label>
-            <input matInput placeholder="Placeholder">
-            <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-        <mat-form-field  appearance="outline">
-            <mat-label>Ürün Adı</mat-label>
-            <input matInput placeholder="Placeholder">
-            <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-        <mat-form-field  appearance="outline">
-            <mat-label>Ürün Adı</mat-label>
-            <input matInput placeholder="Placeholder">
-            <mat-hint>Hint</mat-hint>
-        </mat-form-field>
+        <div class="row">
+            <mat-form-field  appearance="outline">
+                <mat-label>Ürün Adı</mat-label>
+                <input matInput required formControlName="name" >
+                <mat-icon *ngIf="productAddForm.controls['name'].valid && productAddForm.controls['name'].touched " style="color: seagreen;" matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-icon *ngIf="productAddForm.controls['name'].invalid && productAddForm.controls['name'].touched  " style="color: red;" matSuffix>sentiment_very_dissatisfied</mat-icon>
+                <mat-hint style="color: red;" *ngIf="productAddForm.controls['name'].invalid && productAddForm.controls['name'].touched ">
+                        Ürün adı girilmeli ve 2 ile 150 karakter arasında olmalıdır.
+                 </mat-hint>
+            </mat-form-field>
+            <div class="col-md-6">
+                <mat-form-field  appearance="outline">
+                    <mat-label>Birim fiyat</mat-label>
+                    <input type="number" required matInput disableOptionCentering formControlName="unitPrice">
+                    <mat-icon *ngIf="productAddForm.controls['unitPrice'].valid && productAddForm.controls['unitPrice'].touched " style="color: seagreen;" matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-icon *ngIf="productAddForm.controls['unitPrice'].invalid && productAddForm.controls['unitPrice'].touched  " style="color: red;" matSuffix>sentiment_very_dissatisfied</mat-icon>
+                    <mat-hint style="color: red;" *ngIf="productAddForm.controls['unitPrice'].invalid && productAddForm.controls['unitPrice'].touched ">
+                        Ürünün birim fiyat girilmeli ve 0'dan büyük olmalıdır.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field  appearance="outline">
+                    <mat-label>Stok</mat-label>
+                    <input type="number" required matInput formControlName="stock">
+                    <mat-icon *ngIf="productAddForm.controls['stock'].valid && productAddForm.controls['stock'].touched " style="color: seagreen;" matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-icon *ngIf="productAddForm.controls['stock'].invalid && productAddForm.controls['stock'].touched  " style="color: red;" matSuffix>sentiment_very_dissatisfied</mat-icon>
+                    <mat-hint style="color: red;" *ngIf="productAddForm.controls['stock'].invalid && productAddForm.controls['stock'].touched ">
+                        Ürünün birim fiyat girilmeli ve 0'dan büyük olmalıdır.
+                    </mat-hint>
+                </mat-form-field>
+                
+            </div>
+          
+        </div>
+        
+        
+        
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button color="warn" mat-dialog-close>Vazgeç</button>
-    <button mat-stroked-button color="success" cdkFocusInitial>Onayla</button>
+    <button mat-stroked-button color="success" cdkFocusInitial (click)="addProduct()">Onayla</button>
 </mat-dialog-actions>

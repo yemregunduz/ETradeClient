@@ -20,7 +20,9 @@ export class ProductComponent extends BaseComponent implements OnInit {
     this.showSpinner(SpinnerType.JellyBox)
   }
   openProductAddDialog(){
-    const productAddDialogRef = this.dialog.open(ProductAddDialogComponent,{
-    });
+    const productAddDialogRef = this.dialog.open(ProductAddDialogComponent);
+    productAddDialogRef.componentInstance.onAdded.subscribe(response=>{
+      productAddDialogRef.close();
+    })
   }
 }

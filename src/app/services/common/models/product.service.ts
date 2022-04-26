@@ -10,11 +10,8 @@ export class ProductService {
   constructor(private httpClientService:HttpClientService) { }
 
   add(product:AddProduct){
-    this.httpClientService.post({
+    return this.httpClientService.post({
       controllerName:"products"
     },product)
-      .subscribe(result=>{
-        alert("başarılı!")
-      })
   }
 }

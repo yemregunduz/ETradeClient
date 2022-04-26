@@ -28,7 +28,6 @@ export class LayoutComponent implements OnInit {
         this.sidenav.mode = 'side';
         this.sidenav.open();
       }
-      console.log("at kafasi")
     });
   }
 
