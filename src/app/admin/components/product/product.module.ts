@@ -10,7 +10,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon'
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,12 @@ import {MatIconModule} from '@angular/material/icon'
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatGridListModule,
-    MatIconModule,
+    MatGridListModule, MatIconModule, MatSelectModule,MatTableModule,
+    MatDialogModule,MatInputModule,MatButtonModule,MatFormFieldModule,MatPaginatorModule,
     RouterModule.forChild([
       {path:"",component:ProductComponent}
     ]),
-    MatDialogModule,MatInputModule,MatButtonModule,MatFormFieldModule
+    
   ]
 })
 export class ProductModule { }

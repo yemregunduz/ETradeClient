@@ -10,14 +10,15 @@ export class HttpClientService {
   constructor(private httpClient: HttpClient, @Inject("baseUrl") private baseUrl:string) { }
 
   private createUrl(requestParameter:Partial<RequestParameter>){
-    return `${requestParameter.baseUrl ? requestParameter.baseUrl : this.baseUrl}/${requestParameter.controllerName}${requestParameter.action ? `/${requestParameter.action}` : ""}`;
+    return `${requestParameter.baseUrl ? requestParameter.baseUrl : 
+      this.baseUrl}/${requestParameter.controllerName}${requestParameter.action ? `/${requestParameter.action}` : ""}`;
   }
   get<T>(requestParameter:Partial<RequestParameter>,id?:string) :Observable<T>{
     let url = "";
     if(requestParameter.fullEndPoint)
       url = requestParameter.fullEndPoint
     else
-      url = `${this.createUrl(requestParameter)}${id ? `/${id}` : ""}`;
+      url = `${this.createUrl(requestParameter)}${id ? `/${id}` : ""}${requestParameter.queryString ? `?${requestParameter.queryString}`:""} `;
     
     return this.httpClient.get<T>(url, {headers:requestParameter.headers})
   }
@@ -27,7 +28,8 @@ export class HttpClientService {
     if(requestParameter.fullEndPoint)
       url = requestParameter.fullEndPoint
     else
-      url = `${this.createUrl(requestParameter)}`
+      url = `${this.createUrl(requestParameter)}
+      ${requestParameter.queryString ? `?${requestParameter.queryString}`:""}`
     return this.httpClient.post<T>(url,body,{headers:requestParameter.headers})
   }
 
@@ -36,8 +38,8 @@ export class HttpClientService {
     if(requestParameter.fullEndPoint)
       url = requestParameter.fullEndPoint
     else
-      url = `${this.createUrl(requestParameter)}`
-    
+      url = `${this.createUrl(requestParameter)}
+      ${requestParameter.queryString ? `?${requestParameter.queryString}`:""}`
     return this.httpClient.put<T>(url,body,{headers:requestParameter.headers})
   }
 
@@ -46,7 +48,8 @@ export class HttpClientService {
     if(requestParameter.fullEndPoint)
       url = requestParameter.fullEndPoint
     else
-      url = `${this.createUrl(requestParameter)}/${id}`
+      url = `${this.createUrl(requestParameter)}/${id}
+      ${requestParameter.queryString ? `?${requestParameter.queryString}`:""} `
     
     return this.httpClient.delete<T>(url,{headers:requestParameter.headers})
   }
@@ -58,4 +61,5 @@ export class RequestParameter{
   headers?:HttpHeaders;
   baseUrl?:string;
   fullEndPoint?:string;
+  queryString?:string
 }

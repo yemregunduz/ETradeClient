@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { delay } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/base/base.component';
 import { AlertifyMessageType } from 'src/app/enums/alertify/alertifyMessageType';
 import { AlertifyPosition } from 'src/app/enums/alertify/alertifyPosition';
@@ -34,7 +35,7 @@ export class ProductAddDialogComponent extends BaseComponent implements OnInit {
     if(this.productAddForm.valid){
       this.showSpinner(SpinnerType.ClimbingDot)
       var productModel = Object.assign({},this.productAddForm.value)
-      this.productService.add(productModel).subscribe(response=>{
+      this.productService.add(productModel,()=>{
         this.hideSpinner(SpinnerType.ClimbingDot);
         this.alertifyService.message("Ürün eklendi.",{
           dismissOthers:true,
@@ -42,7 +43,14 @@ export class ProductAddDialogComponent extends BaseComponent implements OnInit {
           alertifyPosition:AlertifyPosition.TopRight
         });
         this.onAdded.emit();
-      })
+      }, errorMessage => {
+        this.alertifyService.message(errorMessage,
+          {
+            dismissOthers: true,
+            messageType: AlertifyMessageType.Error,
+            alertifyPosition: AlertifyPosition.TopRight
+          });
+      });
         
     }
     

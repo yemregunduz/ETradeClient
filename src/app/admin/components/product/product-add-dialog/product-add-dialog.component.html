@@ -15,7 +15,7 @@
                 <mat-form-field  appearance="outline">
                     <mat-label>Birim fiyat</mat-label>
                     <input type="number" required matInput disableOptionCentering formControlName="unitPrice">
-                    <mat-icon *ngIf="productAddForm.controls['unitPrice'].valid && productAddForm.controls['unitPrice'].touched " style="color: seagreen;" matSuffix>sentiment_very_satisfied</mat-icon>
+                    <mat-icon  *ngIf="productAddForm.controls['unitPrice'].valid && productAddForm.controls['unitPrice'].touched " style="color: seagreen;" matSuffix>sentiment_very_satisfied</mat-icon>
                     <mat-icon *ngIf="productAddForm.controls['unitPrice'].invalid && productAddForm.controls['unitPrice'].touched  " style="color: red;" matSuffix>sentiment_very_dissatisfied</mat-icon>
                     <mat-hint style="color: red;" *ngIf="productAddForm.controls['unitPrice'].invalid && productAddForm.controls['unitPrice'].touched ">
                         Ürünün birim fiyat girilmeli ve 0'dan büyük olmalıdır.
@@ -32,13 +32,8 @@
                         Ürünün birim fiyat girilmeli ve 0'dan büyük olmalıdır.
                     </mat-hint>
                 </mat-form-field>
-                
             </div>
-          
         </div>
-        
-        
-        
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

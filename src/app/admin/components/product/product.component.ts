@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
+import { ListProduct } from 'src/app/contracts/listProduct';
+import { ListResponseModel } from 'src/app/contracts/listResponseModel';
+import { PageRequest } from 'src/app/contracts/pageRequest';
 import { SpinnerType } from 'src/app/enums/spinner/spinnerType';
+import { ProductService } from 'src/app/services/common/models/product.service';
 import { ProductAddDialogComponent } from './product-add-dialog/product-add-dialog.component';
 
 @Component({
@@ -12,17 +18,32 @@ import { ProductAddDialogComponent } from './product-add-dialog/product-add-dial
 })
 export class ProductComponent extends BaseComponent implements OnInit {
 
-  constructor(spinner:NgxSpinnerService,private dialog:MatDialog) {
+  constructor(spinner:NgxSpinnerService,private dialog:MatDialog,private productService:ProductService) {
     super(spinner)
    }
-
-  ngOnInit(): void {
+   displayedColumns: string[] = ['name', 'stock', 'unitPrice', 'createdDate','updatedDate'];
+   dataSource :MatTableDataSource<ListProduct>= null
+   @ViewChild(MatPaginator) matPaginator:MatPaginator
+  async ngOnInit() {
     this.showSpinner(SpinnerType.JellyBox)
+    await this.getProducts();
   }
   openProductAddDialog(){
     const productAddDialogRef = this.dialog.open(ProductAddDialogComponent);
     productAddDialogRef.componentInstance.onAdded.subscribe(response=>{
       productAddDialogRef.close();
+      this.pageChange();
     })
+  }
+  async getProducts(){
+    let pageRequest:PageRequest = new PageRequest();
+    pageRequest.page = this.matPaginator? this.matPaginator.pageIndex : 0;
+    pageRequest.pageSize = this.matPaginator? this.matPaginator.pageSize : 10;
+    const products = await this.productService.getProductsWithPagination(pageRequest)
+    this.dataSource  = new MatTableDataSource<ListProduct>(products.items)
+    this.matPaginator.length = products.count
+  }
+  async pageChange(){
+    await this.getProducts()
   }
 }
