@@ -13,11 +13,14 @@ import {MatIconModule} from '@angular/material/icon'
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
+import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
 @NgModule({
   declarations: [
     ProductComponent,
-    ProductAddDialogComponent
+    ProductAddDialogComponent,
+    DeleteDirective,
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,

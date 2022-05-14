@@ -5,7 +5,6 @@ import { ListProduct } from 'src/app/contracts/listProduct';
 import { ListResponseModel } from 'src/app/contracts/listResponseModel';
 import { PageRequest } from 'src/app/contracts/pageRequest';
 import { HttpClientService } from '../http-client.service';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -35,8 +34,15 @@ export class ProductService {
       controllerName:"products",
       queryString:`page=${pageRequest.page}&pageSize=${pageRequest.pageSize}`
     },).toPromise();
+    promiseData.then(d=>successCallBack())
+      .catch((errorResponse:HttpErrorResponse)=> errorCallBack(errorResponse.message))
  
     return await promiseData;
   }
-  
+  async delete(id:string){
+    const promiseData = this.httpClientService.delete<any>({
+      controllerName:"products"
+    },id).toPromise()
+    await promiseData;
+  }
 }

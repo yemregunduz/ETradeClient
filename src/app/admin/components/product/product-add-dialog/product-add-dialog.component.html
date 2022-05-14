@@ -4,7 +4,7 @@
         <div class="row">
             <mat-form-field  appearance="outline">
                 <mat-label>Ürün Adı</mat-label>
-                <input matInput required formControlName="name" >
+                <input matInput required formControlName="name" (keyup.enter)="addProduct()">
                 <mat-icon *ngIf="productAddForm.controls['name'].valid && productAddForm.controls['name'].touched " style="color: seagreen;" matSuffix>sentiment_very_satisfied</mat-icon>
                 <mat-icon *ngIf="productAddForm.controls['name'].invalid && productAddForm.controls['name'].touched  " style="color: red;" matSuffix>sentiment_very_dissatisfied</mat-icon>
                 <mat-hint style="color: red;" *ngIf="productAddForm.controls['name'].invalid && productAddForm.controls['name'].touched ">
@@ -14,7 +14,7 @@
             <div class="col-md-6">
                 <mat-form-field  appearance="outline">
                     <mat-label>Birim fiyat</mat-label>
-                    <input type="number" required matInput disableOptionCentering formControlName="unitPrice">
+                    <input type="number" required matInput disableOptionCentering formControlName="unitPrice" (keyup.enter)="addProduct()">
                     <mat-icon  *ngIf="productAddForm.controls['unitPrice'].valid && productAddForm.controls['unitPrice'].touched " style="color: seagreen;" matSuffix>sentiment_very_satisfied</mat-icon>
                     <mat-icon *ngIf="productAddForm.controls['unitPrice'].invalid && productAddForm.controls['unitPrice'].touched  " style="color: red;" matSuffix>sentiment_very_dissatisfied</mat-icon>
                     <mat-hint style="color: red;" *ngIf="productAddForm.controls['unitPrice'].invalid && productAddForm.controls['unitPrice'].touched ">
@@ -25,7 +25,7 @@
             <div class="col-md-6">
                 <mat-form-field  appearance="outline">
                     <mat-label>Stok</mat-label>
-                    <input type="number" required matInput formControlName="stock">
+                    <input type="number" required matInput formControlName="stock" (keyup.enter)="addProduct()">
                     <mat-icon *ngIf="productAddForm.controls['stock'].valid && productAddForm.controls['stock'].touched " style="color: seagreen;" matSuffix>sentiment_very_satisfied</mat-icon>
                     <mat-icon *ngIf="productAddForm.controls['stock'].invalid && productAddForm.controls['stock'].touched  " style="color: red;" matSuffix>sentiment_very_dissatisfied</mat-icon>
                     <mat-hint style="color: red;" *ngIf="productAddForm.controls['stock'].invalid && productAddForm.controls['stock'].touched ">
@@ -38,5 +38,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button color="warn" mat-dialog-close>Vazgeç</button>
-    <button mat-stroked-button color="success" cdkFocusInitial (click)="addProduct()">Onayla</button>
+    <button mat-stroked-button color="success" cdkFocusInitial  (click)="addProduct()">Onayla</button>
 </mat-dialog-actions>
