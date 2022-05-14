@@ -7,6 +7,7 @@ import { AlertifyMessageType } from 'src/app/enums/alertify/alertifyMessageType'
 import { AlertifyPosition } from 'src/app/enums/alertify/alertifyPosition';
 import { SpinnerType } from 'src/app/enums/spinner/spinnerType';
 import { AlertifyService } from 'src/app/services/admin/alertify.service';
+import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -15,7 +16,14 @@ import { ProductService } from 'src/app/services/common/models/product.service';
   styleUrls: ['./product-add-dialog.component.css']
 })
 export class ProductAddDialogComponent extends BaseComponent implements OnInit {
-  @Output() onAdded = new EventEmitter()
+  @Output() onAdded = new EventEmitter();
+  @Output() fileUploadOptions:Partial<FileUploadOptions>={
+    action:"upload",
+    controllerName:"products",
+    explanation:"Resimleri sürükleyin veya seçin...",
+    isAdminPage :true,
+    accept:".png, .jpg, .jpeg"
+  }
   constructor(spinnerService:NgxSpinnerService,private formBuilder:FormBuilder,private productService:ProductService,private alertifyService:AlertifyService) {
     super(spinnerService)
    }

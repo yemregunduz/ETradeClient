@@ -15,6 +15,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
+import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
 @NgModule({
   declarations: [
     ProductComponent,
@@ -27,6 +28,7 @@ import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dia
     ReactiveFormsModule,
     MatGridListModule, MatIconModule, MatSelectModule,MatTableModule,
     MatDialogModule,MatInputModule,MatButtonModule,MatFormFieldModule,MatPaginatorModule,
+    FileUploadModule,
     RouterModule.forChild([
       {path:"",component:ProductComponent}
     ]),
