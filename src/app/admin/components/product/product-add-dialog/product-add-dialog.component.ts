@@ -40,7 +40,7 @@ export class ProductAddDialogComponent extends BaseComponent implements OnInit {
     })
   }
   addProduct(){
-    if(this.productAddForm.valid){
+    if(this.productAddFormValidator(this.productAddForm)){
       this.showSpinner(SpinnerType.ClimbingDot)
       var productModel = Object.assign({},this.productAddForm.value)
       this.productService.add(productModel,()=>{
@@ -58,9 +58,21 @@ export class ProductAddDialogComponent extends BaseComponent implements OnInit {
             messageType: AlertifyMessageType.Error,
             alertifyPosition: AlertifyPosition.TopRight
           });
-      });
-        
+      });  
     }
-    
+  }
+  productAddFormValidator(productAddForm:FormGroup){
+    if(productAddForm.valid){
+      return true;
+    }
+    else{
+      productAddForm.markAllAsTouched()
+      this.alertifyService.message("Lütfen ürün bilgilerini eksiksiz giriniz!",{
+        dismissOthers:true,
+        messageType:AlertifyMessageType.Error,
+        alertifyPosition:AlertifyPosition.TopRight
+      })
+      return false;
+    }
   }
 }
