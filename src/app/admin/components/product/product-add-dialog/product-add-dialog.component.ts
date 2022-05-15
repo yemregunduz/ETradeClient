@@ -8,6 +8,7 @@ import { AlertifyPosition } from 'src/app/enums/alertify/alertifyPosition';
 import { SpinnerType } from 'src/app/enums/spinner/spinnerType';
 import { FileUploadOption } from 'src/app/options/common/fileUploadOption';
 import { AlertifyService } from 'src/app/services/admin/alertify.service';
+import { FormValidatorService } from 'src/app/services/admin/formValidator/form-validator.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class ProductAddDialogComponent extends BaseComponent implements OnInit {
     isAdminPage :true,
     accept:".png, .jpg, .jpeg"
   }
-  constructor(spinnerService:NgxSpinnerService,private formBuilder:FormBuilder,private productService:ProductService,private alertifyService:AlertifyService) {
+  constructor(spinnerService:NgxSpinnerService,private formBuilder:FormBuilder,private productService:ProductService,private alertifyService:AlertifyService,
+    private formValidatorService:FormValidatorService) {
     super(spinnerService)
    }
   productAddForm:FormGroup
@@ -40,7 +42,7 @@ export class ProductAddDialogComponent extends BaseComponent implements OnInit {
     })
   }
   addProduct(){
-    if(this.productAddFormValidator(this.productAddForm)){
+    if(this.formValidatorService.formValidator(this.productAddForm)){
       this.showSpinner(SpinnerType.ClimbingDot)
       var productModel = Object.assign({},this.productAddForm.value)
       this.productService.add(productModel,()=>{
@@ -59,20 +61,6 @@ export class ProductAddDialogComponent extends BaseComponent implements OnInit {
             alertifyPosition: AlertifyPosition.TopRight
           });
       });  
-    }
-  }
-  productAddFormValidator(productAddForm:FormGroup){
-    if(productAddForm.valid){
-      return true;
-    }
-    else{
-      productAddForm.markAllAsTouched()
-      this.alertifyService.message("Lütfen ürün bilgilerini eksiksiz giriniz!",{
-        dismissOthers:true,
-        messageType:AlertifyMessageType.Error,
-        alertifyPosition:AlertifyPosition.TopRight
-      })
-      return false;
     }
   }
 }
