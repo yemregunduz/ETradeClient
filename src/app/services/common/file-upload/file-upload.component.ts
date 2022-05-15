@@ -5,6 +5,7 @@ import { AlertifyMessageType } from 'src/app/enums/alertify/alertifyMessageType'
 import { AlertifyPosition } from 'src/app/enums/alertify/alertifyPosition';
 import { ToastrMessageType } from 'src/app/enums/customToastr/toastrMessageType';
 import { ToastrPosition } from 'src/app/enums/customToastr/toastrPosition';
+import { FileUploadOption } from 'src/app/options/common/fileUploadOption';
 import { AlertifyService } from '../../admin/alertify.service';
 import { CustomToastrService } from '../../ui/custom-toastr.service';
 import { HttpClientService } from '../http-client.service';
@@ -19,7 +20,7 @@ export class FileUploadComponent  {
   constructor(private httpClientService:HttpClientService,private alertifyService:AlertifyService,private customToastrService:CustomToastrService) { }
 
   public files: NgxFileDropEntry[]
-  @Input() options:Partial<FileUploadOptions>
+  @Input() options:Partial<FileUploadOption>
   public selectedFiles(files: NgxFileDropEntry[]) {
     this.files = files;
     const fileData:FormData = new FormData();
@@ -71,11 +72,4 @@ export class FileUploadComponent  {
   }
 }
 
-export class FileUploadOptions{
-  controllerName?:string;
-  action?:string;
-  queryString?:string;
-  explanation?:string;
-  accept?:string;
-  isAdminPage:boolean=false
-}
+

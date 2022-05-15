@@ -6,8 +6,8 @@ import { BaseComponent } from 'src/app/base/base.component';
 import { AlertifyMessageType } from 'src/app/enums/alertify/alertifyMessageType';
 import { AlertifyPosition } from 'src/app/enums/alertify/alertifyPosition';
 import { SpinnerType } from 'src/app/enums/spinner/spinnerType';
+import { FileUploadOption } from 'src/app/options/common/fileUploadOption';
 import { AlertifyService } from 'src/app/services/admin/alertify.service';
-import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -17,7 +17,7 @@ import { ProductService } from 'src/app/services/common/models/product.service';
 })
 export class ProductAddDialogComponent extends BaseComponent implements OnInit {
   @Output() onAdded = new EventEmitter();
-  @Output() fileUploadOptions:Partial<FileUploadOptions>={
+  @Output() fileUploadOption:Partial<FileUploadOption>={
     action:"upload",
     controllerName:"products",
     explanation:"Resimleri sürükleyin veya seçin...",
