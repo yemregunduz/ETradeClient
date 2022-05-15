@@ -54,4 +54,11 @@ export class ProductComponent extends BaseComponent implements OnInit {
   async pageChange(){
     await this.getProducts()
   }
+  async getProductsAfterDelete(){
+    console.log(this.matPaginator.length,this.matPaginator.pageSize)
+    if(this.matPaginator.length%this.matPaginator.pageSize==1){
+      this.matPaginator.pageIndex-=1
+    }
+    await this.getProducts()
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DeleteState } from 'src/app/enums/dialog/deleteState';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -12,9 +13,8 @@ export class DeleteDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data:DeleteState) { }
 
   ngOnInit(): void {
+    
   }
+  
 }
-export enum DeleteState{
-  Yes,
-  No
-}
+
