@@ -16,7 +16,7 @@ export class FormValidatorService {
     }
     else{
       formGroup.markAllAsTouched()
-      this.alertifyService.message("Lütfen ürün bilgilerini eksiksiz giriniz!",{
+      this.alertifyService.message("Lütfen gerekli bilgileri eksiksiz giriniz!",{
         dismissOthers:true,
         messageType:AlertifyMessageType.Error,
         alertifyPosition:AlertifyPosition.TopRight
