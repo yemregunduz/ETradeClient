@@ -1,4 +1,4 @@
-export interface  ListResponseModel<T>{
+export interface  PaginationResponseModel<T> {
     items:T[],
     index:number,
     size:number,

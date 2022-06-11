@@ -2,8 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AddProduct } from 'src/app/contracts/addProduct';
 import { ListProduct } from 'src/app/contracts/listProduct';
-import { ListResponseModel } from 'src/app/contracts/listResponseModel';
 import { PageRequest } from 'src/app/contracts/pageRequest';
+import { PaginationResponseModel } from 'src/app/contracts/responseModels/paginationResponseModel';
+import { SingleResponseModel } from 'src/app/contracts/responseModels/singleResponseModel';
 import { HttpClientService } from '../http-client.service';
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class ProductService {
 
   add(product: AddProduct, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     this.httpClientService.post({
-      controllerName: "products"
+      controllerName: "products",
+      action:"add"
     }, product)
       .subscribe(result => {
         successCallBack();
@@ -29,14 +31,13 @@ export class ProductService {
         errorCallBack(message);
       });
     }
-  async getProductsWithPagination(pageRequest:PageRequest,successCallBack?:()=>void,errorCallBack?:(errorMessage:string) => void) : Promise<ListResponseModel<ListProduct>> {
-    const promiseData:Promise<ListResponseModel<ListProduct>> = this.httpClientService.get<ListResponseModel<ListProduct>>({
+  async getProductsWithPagination(pageRequest:PageRequest,successCallBack?:()=>void,errorCallBack?:(errorMessage:string) => void) : Promise<SingleResponseModel<PaginationResponseModel<ListProduct>>> {
+    const promiseData:Promise<SingleResponseModel<PaginationResponseModel<ListProduct>>>= this.httpClientService.get<SingleResponseModel<PaginationResponseModel<ListProduct>>>({
       controllerName:"products",
-      queryString:`page=${pageRequest.page}&pageSize=${pageRequest.pageSize}`
+      queryString:`RequestParameter.page=${pageRequest.page}&RequestParameter.pageSize=${pageRequest.pageSize}`,
     },).toPromise();
     promiseData.then(d=>successCallBack())
       .catch((errorResponse:HttpErrorResponse)=> errorCallBack(errorResponse.message))
- 
     return await promiseData;
   }
   async delete(id:string){

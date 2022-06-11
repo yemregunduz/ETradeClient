@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { ListProduct } from 'src/app/contracts/listProduct';
-import { ListResponseModel } from 'src/app/contracts/listResponseModel';
 import { PageRequest } from 'src/app/contracts/pageRequest';
 import { AlertifyMessageType } from 'src/app/enums/alertify/alertifyMessageType';
 import { AlertifyPosition } from 'src/app/enums/alertify/alertifyPosition';
@@ -24,7 +23,7 @@ export class ProductComponent extends BaseComponent implements OnInit {
   constructor(spinner:NgxSpinnerService,private dialog:MatDialog,private productService:ProductService,private alertifyService:AlertifyService) {
     super(spinner)
    }
-   displayedColumns: string[] = ['name', 'stock', 'unitPrice', 'createdDate','updatedDate','delete'];
+   displayedColumns =['name', 'stock', 'unitPrice', 'createdDate','updatedDate','delete'];
    dataSource :MatTableDataSource<ListProduct>= null
    @ViewChild(MatPaginator) matPaginator:MatPaginator
   async ngOnInit() {
@@ -48,8 +47,8 @@ export class ProductComponent extends BaseComponent implements OnInit {
       messageType:AlertifyMessageType.Error,
       alertifyPosition:AlertifyPosition.TopRight
     }))
-    this.dataSource  = new MatTableDataSource<ListProduct>(products.items)
-    this.matPaginator.length = products.count
+    this.dataSource  = new MatTableDataSource<ListProduct>(products.data.items)
+    this.matPaginator.length = products.data.count
   }
   async pageChange(){
     await this.getProducts()
