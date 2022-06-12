@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { delay } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/base/base.component';
@@ -25,11 +25,11 @@ export class ProductAddDialogComponent extends BaseComponent implements OnInit {
     isAdminPage :true,
     accept:".png, .jpg, .jpeg"
   }
-  constructor(spinnerService:NgxSpinnerService,private formBuilder:FormBuilder,private productService:ProductService,private alertifyService:AlertifyService,
+  constructor(spinnerService:NgxSpinnerService,private formBuilder:UntypedFormBuilder,private productService:ProductService,private alertifyService:AlertifyService,
     private formValidatorService:FormValidatorService) {
     super(spinnerService)
    }
-  productAddForm:FormGroup
+  productAddForm:UntypedFormGroup
   ngOnInit(): void {
     this.createProductForm()
   }

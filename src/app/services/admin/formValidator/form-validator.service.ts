@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { AlertifyMessageType } from 'src/app/enums/alertify/alertifyMessageType';
 import { AlertifyPosition } from 'src/app/enums/alertify/alertifyPosition';
 import { AlertifyService } from '../alertify.service';
@@ -10,7 +10,7 @@ import { AlertifyService } from '../alertify.service';
 export class FormValidatorService {
 
   constructor(private alertifyService:AlertifyService) { }
-  formValidator(formGroup:FormGroup):boolean{
+  formValidator(formGroup:UntypedFormGroup):boolean{
     if(formGroup.valid){
       return true;
     }
