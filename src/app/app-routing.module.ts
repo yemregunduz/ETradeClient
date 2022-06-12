@@ -23,6 +23,8 @@ const routes: Routes = [
     .then(module=>module.ShoppingCartModule)},
     {path:"products", loadChildren: ()=> import("./ui/components/product/product.module")
     .then(module=>module.ProductModule)},
+    {path:"register",loadChildren:()=>import("./ui/components/register/register.module")
+    .then(module=>module.RegisterModule)}
   ]},
   
 ];

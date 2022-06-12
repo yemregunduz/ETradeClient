@@ -23,7 +23,7 @@ export class HttpClientService {
     return this.httpClient.get<T>(url, {headers:requestParameter.headers})
   }
 
-  post<T>(requestParameter:Partial<RequestParameter>,body:Partial<T>) : Observable<T>{
+  post<T>(requestParameter:Partial<RequestParameter>,body:any) : Observable<T>{
     let url = "";
     if(requestParameter.fullEndPoint)
       url = requestParameter.fullEndPoint

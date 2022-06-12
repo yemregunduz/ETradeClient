@@ -4,6 +4,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductModule } from './product/product.module';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { HomeModule } from './home/home.module';
+import { RegisterModule } from './register/register.module';
 
 
 
@@ -15,7 +16,8 @@ import { HomeModule } from './home/home.module';
     CommonModule,
     ProductModule,
     ShoppingCartModule,
-    HomeModule
+    HomeModule,
+    RegisterModule
   ]
 })
 export class ComponentsModule { }
